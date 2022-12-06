@@ -28,7 +28,7 @@ public class ItemAnimacion : MonoBehaviour
             transform.Rotate(anguloRotacion * velocidadRotacion * Time.deltaTime);
         }
 
-        if (activarScale)
+        if (activarScale) //animacion 
         {
             tiempoScale += Time.deltaTime;
             if (scaleSuperior)
@@ -47,7 +47,7 @@ public class ItemAnimacion : MonoBehaviour
         if (tiempoScale >= scaleRatio)
             {
                 scaleSuperior = !scaleSuperior;
-                tiempoScale = 0;
+                tiempoScale = 0; 
             }
         }
 
