@@ -23,12 +23,12 @@ public class ItemAnimacion : MonoBehaviour
 
     private void Update()
     {
-        if (activarRotacion)
+        if (activarRotacion) //animacion de rotacion
         {
             transform.Rotate(anguloRotacion * velocidadRotacion * Time.deltaTime);
         }
 
-        if (activarScale) //animacion 
+        if (activarScale) //animacion de agrandar-reducir 
         {
             tiempoScale += Time.deltaTime;
             if (scaleSuperior)

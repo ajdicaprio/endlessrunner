@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonedaManager : MonoBehaviour
-    //en el curso lo hace con singleton, hasta ahora funciona sin singleton
+public class MonedaManager : Singleton<MonedaManager>
 {
 
     public int MonedasTotales { get; private set; }
     private string MONEDAS_KEY = "MIS_MONEDAS";
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         MonedasTotales = PlayerPrefs.GetInt(MONEDAS_KEY);
     }
 
