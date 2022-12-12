@@ -13,10 +13,12 @@ public enum EstadosDelJuego
 public class GameManager : Singleton<GameManager>
 {
     public static event Action EventoImanFinalizado;
+    public static event Action<EstadosDelJuego> EventoCambioDeEstado;
 
     [SerializeField] private int velocidadMundo = 5;
     [SerializeField] private int multiplicadorPuntajePorMonedad = 10;
 
+    public int MejorPuntaje => PlayerPrefs.GetInt(MEJOR_PUNTAJE_KEY);
     public int Puntaje => (int) distanciaRecorrida + MonedasObtenidasEnEsteNivel * multiplicadorPuntajePorMonedad;
 
     public float ValorMultiplicador { get; set; }
@@ -24,19 +26,22 @@ public class GameManager : Singleton<GameManager>
     public EstadosDelJuego EstadoActual { get; set; } //prop
     public int MonedasObtenidasEnEsteNivel { get; set; } //prop
 
+    private string MEJOR_PUNTAJE_KEY = "MI_MEJOR_PUNTAJE";
+    private int mejorPuntajeCheck;
     private float distanciaRecorrida;
 
     private void Start()
     {
         ValorMultiplicador = 1f;
+        mejorPuntajeCheck = MejorPuntaje;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CambiarEstado(EstadosDelJuego.Jugando);
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    CambiarEstado(EstadosDelJuego.Jugando);
+        //}  //se reemplazo por el boton Jugar del Menu
 
         if (EstadoActual == EstadosDelJuego.Inicio || EstadoActual == EstadosDelJuego.GameOver)
         {
@@ -50,6 +55,15 @@ public class GameManager : Singleton<GameManager>
         if (EstadoActual != nuevoEstado)
         {
             EstadoActual = nuevoEstado;
+            EventoCambioDeEstado?.Invoke(EstadoActual);
+        }
+    }
+
+    private void ActualizarMejorPuntaje()
+    {
+        if (Puntaje > mejorPuntajeCheck)
+        {
+            PlayerPrefs.SetInt(MEJOR_PUNTAJE_KEY, Puntaje);
         }
     }
 
@@ -76,13 +90,25 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(COImanConteo(duracion));
     }
 
+    private void RespuestaEventoCambioEstado(EstadosDelJuego nuevoEstado)
+    {
+        if (nuevoEstado == EstadosDelJuego.GameOver)
+        {
+            ActualizarMejorPuntaje();
+        }
+    }
+
     private void OnEnable()
     {
         PotenciadorIman.EventoIman += RespuestaEventoIman;
+        EventoCambioDeEstado += RespuestaEventoCambioEstado;
     }
 
     private void OnDisable()
     {
         PotenciadorIman.EventoIman -= RespuestaEventoIman;
+        EventoCambioDeEstado -= RespuestaEventoCambioEstado;
     }
+
+    
 }

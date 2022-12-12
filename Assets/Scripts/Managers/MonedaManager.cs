@@ -42,5 +42,6 @@ public class MonedaManager : Singleton<MonedaManager>
         {
             GastarMonedas(1);
         }
+
     }
 }
