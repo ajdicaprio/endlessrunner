@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : Component 
 {
+    //darle posibilidad a las clases para que no se destruyan en cambio de escena
+    [SerializeField] private bool activarDontDestroy;
+
     private static T _instancia;
     public static T Instancia
     {
@@ -25,6 +28,25 @@ public class Singleton<T> : MonoBehaviour where T : Component
 
     protected virtual void Awake()
     {
-        _instancia = this as T;
+        if (activarDontDestroy)
+        {
+            if (_instancia == null)
+            {
+                _instancia = this as T;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            _instancia = this as T;
+
+        }
+
+
     }
 }

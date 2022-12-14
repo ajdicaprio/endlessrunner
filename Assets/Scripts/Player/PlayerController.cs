@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour
             direccionInput = DireccionInput.Arriba;
         }
 
-        carrilActual = Mathf.Clamp(carrilActual, -1, 1); //lo podria hacer con un poco de if.
+        carrilActual = Mathf.Clamp(carrilActual, -1, 1);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -258,5 +258,7 @@ public class PlayerController : MonoBehaviour
             gameManager.CambiarEstado(EstadosDelJuego.GameOver);
         }
     }
+
+    
 }
 

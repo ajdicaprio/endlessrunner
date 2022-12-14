@@ -31,6 +31,11 @@ public class UIManager : MonoBehaviour
         puntajeTMP.text = GameManager.Instancia.Puntaje.ToString();
     }
 
+    public void TiendaPersonajes()
+    {
+        SceneManager.LoadScene("TiendaPersonajes");
+    }
+
     private void ActualizarMenu()
     {
         diamantesTotalesTMP.text = MonedaManager.Instancia.MonedasTotales.ToString();
@@ -75,6 +80,7 @@ public class UIManager : MonoBehaviour
         GameManager.EventoCambioDeEstado -= RespuestaEventoCambioDeEstado;
 
     }
+
 }
 
 

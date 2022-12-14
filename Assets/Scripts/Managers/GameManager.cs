@@ -15,6 +15,11 @@ public class GameManager : Singleton<GameManager>
     public static event Action EventoImanFinalizado;
     public static event Action<EstadosDelJuego> EventoCambioDeEstado;
 
+    [Header("Personajes")]
+    [SerializeField] private GameObject[] personajes;
+
+
+    [Header("Config")]
     [SerializeField] private int velocidadMundo = 5;
     [SerializeField] private int multiplicadorPuntajePorMonedad = 10;
 
@@ -25,10 +30,18 @@ public class GameManager : Singleton<GameManager>
 
     public EstadosDelJuego EstadoActual { get; set; } //prop
     public int MonedasObtenidasEnEsteNivel { get; set; } //prop
+    public Transform PersonajeActivo { get; private set; }
 
     private string MEJOR_PUNTAJE_KEY = "MI_MEJOR_PUNTAJE";
     private int mejorPuntajeCheck;
     private float distanciaRecorrida;
+
+
+    protected override void Awake()
+    {
+        base.Awake();
+        ActivarPersonajeSeleccionado();
+    }
 
     private void Start()
     {
@@ -57,6 +70,18 @@ public class GameManager : Singleton<GameManager>
             EstadoActual = nuevoEstado;
             EventoCambioDeEstado?.Invoke(EstadoActual);
         }
+    }
+
+    private void ActivarPersonajeSeleccionado()
+    {
+        for (int i = 0; i < personajes.Length; i++)
+        {
+            personajes[i].SetActive(false);
+        }
+
+        PersonajeActivo = personajes[PersonajeManager.Instancia.PersonajeSeleccionadoIndex].transform;
+        PersonajeActivo.gameObject.SetActive(true);
+
     }
 
     private void ActualizarMejorPuntaje()
