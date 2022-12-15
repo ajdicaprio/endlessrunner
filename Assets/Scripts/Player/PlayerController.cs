@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
 
             if (direccionInput == DireccionInput.Arriba)
             {
+                SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.saltoClip);
                 EstaSaltando = true;
                 posicionVertical = valorsalto;
                 playerAnimaciones.MostrarAnimacionSaltar(); //animacion
@@ -137,6 +138,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator CODeslizarPersonaje()
     {
+        SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.deslizarClip);
         EstaDeslizando = true;
         playerAnimaciones.MostrarAnimacionDeslizar(); //animacion
         ModificarColliderDeslizar(true);
@@ -254,6 +256,7 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
+            SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.colisionClip);
             playerAnimaciones.MostrarAnimacionColision(); //animacion
             gameManager.CambiarEstado(EstadosDelJuego.GameOver);
         }

@@ -33,6 +33,7 @@ public class Diamante : MonoBehaviour
     private void ObtenerDiamante()
     {
         //aumentar las monedas
+        SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.itemClip);
         MonedaManager.Instancia.AnadirMonedas(valorMonedas);
         GameManager.Instancia.MonedasObtenidasEnEsteNivel += valorMonedas;
         gameObject.SetActive(false);

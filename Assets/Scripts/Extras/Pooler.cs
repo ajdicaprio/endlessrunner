@@ -53,4 +53,17 @@ public class Pooler : MonoBehaviour
 
         return null;
     }
+
+    public GameObject ObtenerInstanciaDelPooler()
+    {
+        for (int i = 0; i < instanciasCreadas.Count; i++)
+        {
+                if (instanciasCreadas[i].activeSelf == false)
+                {
+                    return instanciasCreadas[i];
+                }
+        }
+
+        return null;
+    }
 }

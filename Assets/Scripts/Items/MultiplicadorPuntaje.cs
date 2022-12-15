@@ -11,6 +11,7 @@ public class MultiplicadorPuntaje : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.itemClip);
             GameManager.Instancia.ValorMultiplicador = valor;
             GameManager.Instancia.IniciarConteoMultiplicador(duracion);
             gameObject.SetActive(false);

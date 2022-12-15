@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
 
     public void TiendaPersonajes()
     {
+        SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.uiClip);
         SceneManager.LoadScene("TiendaPersonajes");
     }
 
@@ -51,6 +52,7 @@ public class UIManager : MonoBehaviour
 
     public void Jugar()
     {
+        SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.uiClip);
         panelMenuInicio.SetActive(false);
         GameManager.Instancia.CambiarEstado(EstadosDelJuego.Jugando);
     }
@@ -59,6 +61,7 @@ public class UIManager : MonoBehaviour
         //debe estar en publico para que lo encuentre el inspector
         //Cuendo lo elijo en el inspector se colorea como usado
     {
+        SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.uiClip);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); //using UnityEngine.SceneManagement;
     }
 

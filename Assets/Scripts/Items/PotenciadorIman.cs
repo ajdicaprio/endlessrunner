@@ -16,6 +16,7 @@ public class PotenciadorIman : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.itemClip);
             EventoIman?.Invoke(duracion);
             gameObject.SetActive(false);
         }

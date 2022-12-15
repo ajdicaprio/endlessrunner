@@ -46,6 +46,7 @@ public class PersonajeCard : MonoBehaviour
 
     public void ClickCard()
     {
+        SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.uiClip);
         EventoClickCard?.Invoke(this);
     }
 

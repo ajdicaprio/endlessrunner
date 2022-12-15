@@ -46,6 +46,7 @@ public class UITiendaPersonaje : MonoBehaviour
     {
         if (MonedaManager.Instancia.MonedasTotales >= cardClickeado.Costo)
         {
+            SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.uiClip);
             cardClickeado.ComprarPersonaje();
             ActualizarInfo(cardClickeado);
             MonedaManager.Instancia.GastarMonedas(cardClickeado.Costo);
@@ -59,6 +60,7 @@ public class UITiendaPersonaje : MonoBehaviour
             cards[i].DeseleccionarPersonaje();
 
         }
+        SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.uiClip);
         PersonajeManager.Instancia.SeleccionarPersonaje(cardClickeado);
         cardClickeado.SeleccionarPersonaje();
         ActualizarInfo(cardClickeado);
@@ -66,6 +68,7 @@ public class UITiendaPersonaje : MonoBehaviour
 
     public void RegresarAlMenu() //lo referencio es las funciones clic del boton en el inspector
     {
+        SoundManager.Instancia.ReproducirSonidoFX(SoundManager.Instancia.uiClip);
         SceneManager.LoadScene("EndlessRunner"); //using UnityEngine.SceneManagement;
     }
 
